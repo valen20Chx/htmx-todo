@@ -1,0 +1,30 @@
+<!-- prettier-ignore -->
+<ul id="tasks-list">
+  {% for task in tasks %}
+  <li
+    style="display: flex; gap: 8px"
+  >
+    <span>{{ task.desc }}</span>
+    {% if task.done %}
+      <span>
+        [DONE]
+      </span>
+    {% else %}
+      <button
+        hx-patch="/check/{{task.id}}"
+        hx-target="#tasks-list"
+        hx-swap="outerHTML"
+      >
+        Mark as done
+      </button>
+      <button
+        hx-delete="/delete/{{task.id}}"
+        hx-target="#tasks-list"
+        hx-swap="outerHTML"
+      >
+        Delete
+      </button>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
